@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Tesk 2</title>
+</head>
+<body>
+asas
+<label>Телефон</label>
+<input onkeypress="countChar1()" id="code" type="text">
+<input onkeypress="countChar2()" id="part1" type="text">
+<input id="part2" type="text">
+<script type="text/javascript">
+    var part1;
+    var part2;
+    window.onload = function () {
+        console.log("load");
+        part1 = document.getElementById('part1');
+        part2 = document.getElementById('part2');
+    };
+
+    function countChar1() {
+        console.log("count");
+        let input = document.getElementById('code').value;
+        console.log(input);
+        if (input.length >= 2) {
+            part1.focus();
+        }
+    }
+
+    function countChar2() {
+        console.log("count2");
+        let input = document.getElementById('part1').value;
+        console.log(input);
+        if (input.length >= 2) {
+            part2.focus();
+        }
+    }
+</script>
+</body>
+</html>
