@@ -138,4 +138,37 @@ class User
                 "", "phptest");
     }
 
+
+    public function login($login, $pass)
+    {
+        global $mysqli;
+
+        if ($stmt = $mysqli->prepare("select `id`,`name`,`password` from `users` where `name`=? limit 1")) {
+            $stmt->bind_param('s', $login);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result) {
+                if ($result->num_rows > 0) {
+                    $user = new User();
+                    while ($row = $result->fetch_assoc()) {
+                        $id = $row["id"];
+                        $name = $row["name"];
+                        $passorr = $row["password"];
+                    }
+
+                    if ($login == $name && $pass == $passorr) {
+                        $_SESSION['auth_user'] = $login;
+                    }
+                }
+            } else {
+                return null;
+            }
+
+        } else {
+            $error = $mysqli->errno . ' ' . $mysqli->error;
+            echo $error; // 1054 Unknown column 'foo' in 'field list'
+        }
+    }
+
+
 }

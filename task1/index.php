@@ -18,9 +18,12 @@ $user->save();
 */
 
 
-$user = User::getUserById(3);
-$user->deleteUser();
+//$user = User::getUserByName("test2");
+//var_dump($user);
+//$user->deleteUser();
 
-$array_users = User::getAll();
+//$array_users = User::getAll();
 
-var_dump($array_users);
+($user->login("test2","test2"));
+echo "auth_user: ".$_SESSION["auth_user"];
+
