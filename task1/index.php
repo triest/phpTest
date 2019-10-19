@@ -7,12 +7,14 @@
      * Date: 19.10.2019
      * Time: 10:13
      */
-    User::connect();
 
 
     $user = new User();
+    $user->name = "test4";
+    $user->password = "test4";
+    $user->save();
 
-    $user->login("test2", "test2");
+    $user->login("test4", "test4");
     echo "auth_user: " . $_SESSION["auth_user"];
     echo '<br>';
     $user->logout();

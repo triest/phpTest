@@ -13,13 +13,28 @@
 
         public $name;
 
-        private $password;
+        public $password;
+
+        /**
+         * User constructor.
+         */
+        public function __construct()
+        {
+            self::connect();
+        }
 
 
         public function save()
         {
+            $user = $this->getUserByName($this->name);
+            if ($user != null) {
+                return false;
+            }
+
             global $mysqli;
+
             //проверка что такого пользователя нет
+            $this->password = md5($this->password);
 
             if ($stmt = $mysqli->prepare("INSERT INTO `users`( `name`, `password`) VALUES (?,?)")) {
                 $stmt->bind_param('ss', $this->name, $this->password);
@@ -29,6 +44,7 @@
                 $error = $mysqli->errno . ' ' . $mysqli->error;
                 echo $error; // 1054 Unknown column 'foo' in 'field list'
             }
+            return true;
         }
 
         public static function getByID($id)
@@ -101,7 +117,7 @@
         }
 
 
-        public static function getUserByName($name)
+        public function getUserByName($name)
         {
             global $mysqli;
 
@@ -127,6 +143,7 @@
                 echo $error; // 1054 Unknown column 'foo' in 'field list'
             }
         }
+
 
         public static function connect()
         {
@@ -156,8 +173,12 @@
                             $passorr = $row["password"];
                         }
 
+
+                        $pass = md5($pass);
                         if ($login == $name && $pass == $passorr) {
-                            session_start();
+                            if (session_status() == 0) {
+                                session_start();
+                            }
                             $_SESSION['auth_user'] = $login;
                         }
                     }
