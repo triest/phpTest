@@ -14,6 +14,6 @@
 
     $user->login("test2", "test2");
     echo "auth_user: " . $_SESSION["auth_user"];
-
+    echo '<br>';
     $user->logout();
     echo "auth_user: " . $_SESSION["auth_user"];

@@ -3,14 +3,17 @@
 <head>
     <title>Tesk 2</title>
     <script src="js/index.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <meta charset="UTF-8">
 </head>
 <body>
 <div class="row">
-    <label>Телефон</label>
-    <input onkeypress="countChar1()" id="code" type="text" size="3">
-    <input onkeypress="countChar2()" id="part1" type="text" size="3">
-    <input id="part2" type="text" size="4">
+    <form id="form" action="server.php">
+        <label>Телефон</label>
+        <input onkeypress="countChar1()" id="code" type="text" size="3">
+        <input onkeypress="countChar2()" id="part1" type="text" size="3">
+        <input onkeypress="countChar3()" id="part2" type="text" size="4">
+    </form>
 </div>
 </body>
 </html>
