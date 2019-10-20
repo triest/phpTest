@@ -5,7 +5,7 @@
      * Date: 19.10.2019
      * Time: 9:50
      */
-
+    include '../config.php';
 
     class User
     {
@@ -15,13 +15,7 @@
 
         public $password;
 
-        /**
-         * User constructor.
-         */
-        public function __construct()
-        {
-            self::connect();
-        }
+
 
 
         public function save()
@@ -40,6 +34,7 @@
                 $stmt->bind_param('ss', $this->name, $this->password);
                 $stmt->execute();
                 $result = $stmt->get_result();
+                return $stmt->insert_id;
             } else {
                 $error = $mysqli->errno . ' ' . $mysqli->error;
                 echo $error; // 1054 Unknown column 'foo' in 'field list'
@@ -145,17 +140,6 @@
         }
 
 
-        public static function connect()
-        {
-            global $mysqli;
-
-            $users_database = array("host" => "127.0.0.1", "login" => "root", "password" => "");
-
-            $mysqli = new mysqli("127.0.0.1", "root",
-                    "", "phptest");
-        }
-
-
         public function login($login, $pass)
         {
             global $mysqli;
@@ -194,7 +178,7 @@
 
         public function logout()
         {
-            session_unset();
+            $_SESSION['auth_user'] = null;
         }
 
 
