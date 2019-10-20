@@ -39,16 +39,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+              <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateDatabase.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CreateDatabase.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/task1/CreateDatabase.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
@@ -104,7 +104,6 @@
         <option value="&lt;1cc8385a-929f-47c9-b206-547da89c2832&gt;/srv/www/vhosts/drevlanka.ru/work/userscontrol/tpl/statsitem.tpl" />
         <option value="$PROJECT_DIR$/task2/js/index.js" />
         <option value="$PROJECT_DIR$/task2/index.html" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/task1/test/UserTest.php" />
         <option value="$PROJECT_DIR$/task1/index.php" />
         <option value="$PROJECT_DIR$/task1/class/User.php" />
@@ -112,6 +111,7 @@
         <option value="$PROJECT_DIR$/task1/CreateDatabase.php" />
         <option value="$PROJECT_DIR$/task1/config.php" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -224,7 +224,7 @@
       <workItem from="1571503152422" duration="3492000" />
       <workItem from="1571512003145" duration="492000" />
       <workItem from="1571512907075" duration="6300000" />
-      <workItem from="1571576972628" duration="9778000" />
+      <workItem from="1571576972628" duration="9969000" />
     </task>
     <task id="LOCAL-00001" summary="Add user class and save it">
       <created>1571470657723</created>
@@ -300,7 +300,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32540000" />
+    <option name="totallyTimeSpent" value="32731000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -455,13 +455,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/task1/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -511,6 +504,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
         </state>
       </provider>
     </entry>
