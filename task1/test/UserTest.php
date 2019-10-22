@@ -34,9 +34,11 @@
             $user = new User();
             $user->name = "test5";
             $user->password = "test5";
-            $user->save();
+            $id = $user->save();
             $user->login("test5", "test5");
             $this->assertEquals("test5", $_SESSION["auth_user"]);
+            $userItem = $user->getByID($id);
+            $userItem->delete();
         }
 
         public function testLogout()
@@ -44,9 +46,10 @@
             $user = new User();
             $user->name = "test5";
             $user->password = "test5";
-            $user->save();
+            $id = $user->save();
             $user->login("test5", "test5");
             $user->logout();
             $this->assertEquals(null, $_SESSION["auth_user"]);
+            $user->delete();
         }
     }

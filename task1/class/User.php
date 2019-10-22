@@ -16,8 +16,6 @@
         public $password;
 
 
-
-
         public function save()
         {
             $user = $this->getUserByName($this->name);
@@ -33,7 +31,6 @@
             if ($stmt = $mysqli->prepare("INSERT INTO `users`( `name`, `password`) VALUES (?,?)")) {
                 $stmt->bind_param('ss', $this->name, $this->password);
                 $stmt->execute();
-                $result = $stmt->get_result();
                 return $stmt->insert_id;
             } else {
                 $error = $mysqli->errno . ' ' . $mysqli->error;
@@ -50,22 +47,16 @@
                 $stmt->bind_param('s', $id);
                 $stmt->execute();
                 $result = $stmt->get_result();
-                if ($result) {
-                    if ($result->num_rows > 0) {
-                        $user = new User();
-                        while ($row = $result->fetch_assoc()) {
-                            $user->id = $row["id"];
-                            $user->name = $row["name"];
-                        }
-                        return $user;
+                if ($result && $result->num_rows > 0) {
+                    $user = new User();
+                    while ($row = $result->fetch_assoc()) {
+                        $user->id = $row["id"];
+                        $user->name = $row["name"];
                     }
-                } else {
-                    return null;
+                    return $user;
                 }
-
             } else {
-                $error = $mysqli->errno . ' ' . $mysqli->error;
-                echo $error; // 1054 Unknown column 'foo' in 'field list'
+                return null;
             }
         }
 
@@ -77,23 +68,18 @@
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $array_users = array();
-                if ($result) {
-                    if ($result->num_rows > 0) {
-                        $user = new User();
-                        while ($row = $result->fetch_assoc()) {
-                            $user->id = $row["id"];
-                            $user->name = $row["name"];
-                            array_push($array_users, $user);
-                        }
-                        return $array_users;
-                    }
-                } else {
-                    return null;
-                }
+                if ($result && $result->num_rows > 0) {
 
+                    $user = new User();
+                    while ($row = $result->fetch_assoc()) {
+                        $user->id = $row["id"];
+                        $user->name = $row["name"];
+                        array_push($array_users, $user);
+                    }
+                    return $array_users;
+                }
             } else {
-                $error = $mysqli->errno . ' ' . $mysqli->error;
-                echo $error; // 1054 Unknown column 'foo' in 'field list'
+                return null;
             }
         }
 
@@ -148,31 +134,25 @@
                 $stmt->bind_param('s', $login);
                 $stmt->execute();
                 $result = $stmt->get_result();
-                if ($result) {
-                    if ($result->num_rows > 0) {
-                        $user = new User();
-                        while ($row = $result->fetch_assoc()) {
-                            $id = $row["id"];
-                            $name = $row["name"];
-                            $passorr = $row["password"];
-                        }
-
-
-                        $pass = md5($pass);
-                        if ($login == $name && $pass == $passorr) {
-                            if (session_status() == 0) {
-                                session_start();
-                            }
-                            $_SESSION['auth_user'] = $login;
-                        }
+                if ($result && $result->num_rows > 0) {
+                    $user = new User();
+                    while ($row = $result->fetch_assoc()) {
+                        $id = $row["id"];
+                        $name = $row["name"];
+                        $passorr = $row["password"];
                     }
-                } else {
-                    return null;
-                }
 
+
+                    $pass = md5($pass);
+                    if ($login == $name && $pass == $passorr) {
+                        if (session_status() == 0) {
+                            session_start();
+                        }
+                        $_SESSION['auth_user'] = $login;
+                    }
+                }
             } else {
-                $error = $mysqli->errno . ' ' . $mysqli->error;
-                echo $error; // 1054 Unknown column 'foo' in 'field list'
+                return null;
             }
         }
 
