@@ -5,16 +5,15 @@ window.onload = function () {
     part1 = document.getElementById('part1');
     part2 = document.getElementById('part2');
     code = document.getElementById('code');
-    part2.oninput = function () {
-        if (part2.value.length == 0) {
-            part1.focus();
-        }
+    code.onkeydown = function () {
+        countChar1();
     };
-    part1.oninput = function () {
-        if (part1.value.length == 0) {
-            code.focus();
-        }
+    part1.onkeydown = function () {
+        countChar2()
     };
+    part2.onkeydown = function () {
+        countChar3()
+    }
 };
 
 
@@ -34,15 +33,12 @@ function countChar2() {
 
 function countChar3() {
     let input = part2.value;
-    console.log(input.length);
     if (input.length === 3) {
-        sendRequwest()
+        sendRequest()
     }
 }
 
-function sendRequwest() {
-    var formData = {s: 's'};
-    var xhr = new XMLHttpRequest();
+function sendRequest() {
     var data = {};
     data.code = code.value;
     data.part1 = part1.value;
