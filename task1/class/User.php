@@ -9,13 +9,26 @@
 
     class User
     {
+        /**
+         * @var
+         */
         public $id;
 
+        /**
+         * @var
+         */
         public $name;
 
+        /**
+         * @var
+         */
         public $password;
 
 
+        /**
+         * @return bool|int
+         * сохраняет пользователя в баз дынных
+         */
         public function save()
         {
             $user = $this->getUserByName($this->name);
@@ -39,6 +52,11 @@
             return true;
         }
 
+        /**
+         * @param $id
+         * @return null|User
+         * в
+         */
         public static function getByID($id)
         {
             global $mysqli;
@@ -60,6 +78,10 @@
             }
         }
 
+        /**
+         * возвращает массив всех пользователей
+         * @return array|null
+         */
         public static function getAll()
         {
             global $mysqli;
@@ -67,14 +89,14 @@
             if ($stmt = $mysqli->prepare("select `id`,`name` from `users`")) {
                 $stmt->execute();
                 $result = $stmt->get_result();
-                $array_users = array();
+                $array_users = array(); //мссив с извлеченными пользователями
                 if ($result && $result->num_rows > 0) {
 
                     $user = new User();
                     while ($row = $result->fetch_assoc()) {
                         $user->id = $row["id"];
                         $user->name = $row["name"];
-                        array_push($array_users, $user);
+                        array_push($array_users, $user); //
                     }
                     return $array_users;
                 }
@@ -83,6 +105,10 @@
             }
         }
 
+        /**
+         *удаление пользователя
+         * @return null
+         */
         public function delete()
         {
             global $mysqli;
@@ -97,7 +123,12 @@
 
         }
 
+        //удаление пользователя
 
+        /**
+         * @param $name
+         * @return null|User
+         */
         public function getUserByName($name)
         {
             global $mysqli;
@@ -121,41 +152,36 @@
 
             } else {
                 $error = $mysqli->errno . ' ' . $mysqli->error;
-                echo $error; // 1054 Unknown column 'foo' in 'field list'
+                echo $error;
             }
         }
 
 
+        /**
+         * @param $login
+         * @param $pass, вход на сайт
+         * @return int
+         */
         public function login($login, $pass)
         {
-            global $mysqli;
+            $user = $this->getUserByName($login);
+            if ($user == null) {
+                return 404;
+            }
 
-            if ($stmt = $mysqli->prepare("select `id`,`name`,`password` from `users` where `name`=? limit 1")) {
-                $stmt->bind_param('s', $login);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                if ($result && $result->num_rows > 0) {
-                    $user = new User();
-                    while ($row = $result->fetch_assoc()) {
-                        $id = $row["id"];
-                        $name = $row["name"];
-                        $passorr = $row["password"];
-                    }
-
-
-                    $pass = md5($pass);
-                    if ($login == $name && $pass == $passorr) {
-                        if (session_status() == 0) {
-                            session_start();
-                        }
-                        $_SESSION['auth_user'] = $login;
-                    }
+            $pass = md5($pass);
+            if ($login == $user->name && $pass == $user->password) {
+                if (session_status() == 0) {
+                    session_start();
                 }
-            } else {
-                return null;
+                $_SESSION['auth_user'] = $login;
+                return 200;
             }
         }
 
+        /**
+         * выход
+         */
         public function logout()
         {
             $_SESSION['auth_user'] = null;
